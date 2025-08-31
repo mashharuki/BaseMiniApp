@@ -70,6 +70,8 @@ FarcasterでdeployされたアプリのURLをそのままコピペしてcastす�
 npx create-onchain --manifest
 ```
 
+このコマンドを実行する前に`Farcaster`のアプリの設定から`Farcaster`で使っているウォレットの秘密鍵をエクスポートし、Metamaskにインポートしておく必要がある
+
 ## ローカルで起動させた時のスクショ
 
 ![](./docs/0.png)
