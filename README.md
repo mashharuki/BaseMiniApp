@@ -64,6 +64,10 @@ FarcasterでdeployされたアプリのURLをそのままコピペしてcastす�
 
 [baseSepolia - 実際に実行したトランザクション](https://sepolia.basescan.org/tx/0x01dea3754d68940b28af20c2c11fb7edba185a6096df2b2dcac28b69ac1eda38)
 
+My Mini Appに追加した時のイメージ
+
+![](./docs/18.png)
+
 ## Farcaster用のanifestファイル生成コマンド
 
 ```bash
@@ -71,6 +75,12 @@ npx create-onchain --manifest
 ```
 
 このコマンドを実行する前に`Farcaster`のアプリの設定から`Farcaster`で使っているウォレットの秘密鍵をエクスポートし、Metamaskにインポートしておく必要がある
+
+FarcasterのSettingsからも生成できる方法を発見！
+
+![](./docs/14.png)
+
+![](./docs/15.png)
 
 ## ローカルで起動させた時のスクショ
 
@@ -81,6 +91,12 @@ npx create-onchain --manifest
 ![](./docs/2.png)
 
 ![](./docs/3.png)
+
+## Base Buildへの登録
+
+![](./docs/17.png)
+
+![](./docs/16.png)
 
 ## 参考文献
 - [Base Docs MiniApp](https://www.base.org/build/mini-apps)
