@@ -26,6 +26,7 @@ export function ShootingGame() {
   const BASE_H = 540;
 
   const [running, setRunning] = useState(false);
+  const runningRef = useRef(false);
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
   const [high, setHigh] = useState(0);
@@ -83,7 +84,7 @@ export function ShootingGame() {
     const bullets = bulletsRef.current;
     const enemies = enemiesRef.current;
 
-    if (running) {
+    if (runningRef.current) {
       const move = 0.28 * dt * speedMul;
       if (keyRef.current['ArrowLeft'] || keyRef.current['a']) player.x -= move;
       if (keyRef.current['ArrowRight'] || keyRef.current['d']) player.x += move;
@@ -212,6 +213,9 @@ export function ShootingGame() {
 
   // lifecycle
   useEffect(() => {
+    // keep ref in sync to avoid stale closure in RAF loop
+    runningRef.current = running;
+
     // highscore
     try {
       const hs = localStorage.getItem('shooting_highscore');
