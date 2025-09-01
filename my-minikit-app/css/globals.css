@@ -1,12 +1,15 @@
+/* アプリ共通のグローバル CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Light モードの基調色 */
 :root {
   --background: #ffffff;
   --foreground: #111111;
 }
 
+/* OS 設定がダークモードのとき */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #111111;

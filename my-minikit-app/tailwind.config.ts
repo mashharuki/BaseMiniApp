@@ -1,6 +1,8 @@
+// Tailwind CSS の設定ファイル
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
+  // スキャン対象（クラス名抽出）
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',

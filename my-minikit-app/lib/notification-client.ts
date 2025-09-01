@@ -1,12 +1,16 @@
+// Farcaster Frame SDK の通知送信関連型／バリデーション
 import {
   MiniAppNotificationDetails,
   type SendNotificationRequest,
   sendNotificationResponseSchema,
 } from '@farcaster/frame-sdk';
+// ユーザーの通知設定（トークン等）を Redis から取得
 import { getUserNotificationDetails } from '@/lib/notification';
 
+// 通知からの遷移先（MiniApp の URL）
 const appUrl = process.env.NEXT_PUBLIC_URL || '';
 
+// 通知送信の結果を表すユニオン型
 type SendFrameNotificationResult =
   | {
       state: 'error';
@@ -16,6 +20,11 @@ type SendFrameNotificationResult =
   | { state: 'rate_limit' }
   | { state: 'success' };
 
+/**
+ * Farcaster の通知エンドポイントに対し、ユーザーのトークンを用いて通知を送信します。
+ * - notificationDetails が未指定の場合は Redis から取得します。
+ * - 成功時／レート制限時／トークン未登録時／エラー時で状態を返します。
+ */
 export async function sendFrameNotification({
   fid,
   title,
@@ -34,6 +43,7 @@ export async function sendFrameNotification({
     return { state: 'no_token' };
   }
 
+  // Farcaster の通知エンドポイントへリクエスト
   const response = await fetch(notificationDetails.url, {
     method: 'POST',
     headers: {
