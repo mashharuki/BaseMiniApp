@@ -1,3 +1,4 @@
+import ShootingGame from "@/components/Game";
 import { TransactionCard } from "@/components/TransactionCard";
 import { useMemo } from "react";
 import { useAccount } from "wagmi";
@@ -28,6 +29,8 @@ export function Home() {
   
   return (
     <div className="animate-fade-in space-y-6">
+      {/* シューティングゲーム コンポーネント */}
+      <ShootingGame />
       {/* トランザクションカード コンポーネント */}
       <TransactionCard calls={calls}/>
     </div>
