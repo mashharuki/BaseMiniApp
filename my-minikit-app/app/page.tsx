@@ -5,10 +5,10 @@
 // - Wallet 連携 UI（OnchainKit）
 // - 簡易的なタブ切り替え（Home / Features）
 
-import { useMiniKit } from '@coinbase/onchainkit/minikit';
-import { useEffect, useState } from 'react';
 import { Footer, Header } from '@/components/common';
-import { Features, Home } from '@/components/DemoComponents';
+import { Home } from '@/components/DemoComponents';
+import { useMiniKit } from '@coinbase/onchainkit/minikit';
+import { useEffect } from 'react';
 
 /**
  * App コンポーネント
@@ -17,7 +17,6 @@ import { Features, Home } from '@/components/DemoComponents';
 export default function App() {
   // MiniKit のコンテキスト（フレーム準備完了フラグやクライアント状態）
   const { setFrameReady, isFrameReady } = useMiniKit();
-  const [activeTab, setActiveTab] = useState('home');
 
   useEffect(() => {
     if (!isFrameReady) {
@@ -32,8 +31,7 @@ export default function App() {
         <Header />
         {/* メインコンポーネント */}
         <main className="flex-1">
-          {activeTab === 'home' && <Home setActiveTab={setActiveTab} />}
-          {activeTab === 'features' && <Features setActiveTab={setActiveTab} />}
+         <Home />
         </main>
         {/* フッター */}
         <Footer />
