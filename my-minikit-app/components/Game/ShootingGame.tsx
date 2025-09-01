@@ -19,6 +19,7 @@ export function ShootingGame() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const rafRef = useRef<number | null>(null);
+  const lastTickRef = useRef<number | undefined>(undefined);
 
   // Logical canvas size (scaled for DPR)
   const BASE_W = 360;
@@ -71,9 +72,9 @@ export function ShootingGame() {
     ctx.setTransform(scale * dpr, 0, 0, scale * dpr, 0, 0);
 
     // time delta (ms)
-    const last = (loop as any)._last ?? now;
+    const last = lastTickRef.current ?? now;
     const dt = Math.min(32, now - last);
-    (loop as any)._last = now;
+    lastTickRef.current = now;
 
     const speedMul = 1 + Math.min(1.5, score / 50) * 0.5; // slightly speed up with score
 
@@ -193,7 +194,7 @@ export function ShootingGame() {
     }
 
     rafRef.current = requestAnimationFrame(loop);
-  }, [BASE_W, BASE_H, high, running, score]);
+  }, [BASE_W, BASE_H, gameOver, high, running, score]);
 
   const startGame = useCallback(() => {
     // reset
@@ -202,7 +203,7 @@ export function ShootingGame() {
     enemiesRef.current = [];
     cooldownRef.current = 0;
     spawnRef.current = { t: 0, interval: 1000 };
-    (loop as any)._last = undefined;
+    lastTickRef.current = undefined;
     setScore(0);
     setGameOver(false);
     setRunning(true);
@@ -252,8 +253,10 @@ export function ShootingGame() {
       setTimeout(() => (keyRef.current[' '] = false), 60);
       if (!running) startGame();
     };
-    canvasRef.current?.addEventListener('mousedown', handlePointer);
-    canvasRef.current?.addEventListener('touchstart', handlePointer, { passive: true });
+    // capture canvas element to ensure stable cleanup references
+    const canvasEl = canvasRef.current;
+    canvasEl?.addEventListener('mousedown', handlePointer);
+    canvasEl?.addEventListener('touchstart', handlePointer, { passive: true });
 
     // kick off passive render loop for initial frame
     rafRef.current = requestAnimationFrame(loop);
@@ -262,8 +265,8 @@ export function ShootingGame() {
       window.removeEventListener('resize', onResize);
       window.removeEventListener('keydown', down);
       window.removeEventListener('keyup', up);
-      canvasRef.current?.removeEventListener('mousedown', handlePointer);
-      canvasRef.current?.removeEventListener('touchstart', handlePointer);
+      canvasEl?.removeEventListener('mousedown', handlePointer);
+      canvasEl?.removeEventListener('touchstart', handlePointer);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, [BASE_W, BASE_H, fitCanvas, running, gameOver, startGame, loop]);
