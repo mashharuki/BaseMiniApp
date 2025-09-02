@@ -1,6 +1,10 @@
 # BaseMiniApp
 Base Mini Appを学習するためのサンプルリポジトリです。
 
+## シューティングゲームのデモ
+
+[デモ動画](https://x.com/haruki_web3/status/1962851527074472211)
+
 ## テンプレプロジェクト生成コマンド
 
 ```bash
@@ -97,6 +101,16 @@ FarcasterのSettingsからも生成できる方法を発見！
 ![](./docs/17.png)
 
 ![](./docs/16.png)
+
+## シューティングゲームのUI
+
+![](./docs/19.png)
+
+![](./docs/20.png)
+
+![](./docs/21.png)
+
+![](./docs/22.png)
 
 ## テストネットにデプロイしたNFT(ERC1155)
 
