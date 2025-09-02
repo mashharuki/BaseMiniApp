@@ -13,13 +13,15 @@ import {
   TransactionToastLabel,
 } from '@coinbase/onchainkit/transaction';
 import { useCallback } from 'react';
+import { Abi } from 'viem';
 import { useAccount } from 'wagmi';
 
 type TransactionProps = {
   calls: {
-    to: `0x${string}`;
-    data: `0x${string}`;
-    value: bigint;
+    address: `0x${string}`,
+    abi: Abi,
+    functionName: string,
+    args: (string | number | bigint | boolean | `0x${string}`)[],
   }[];
 };
 

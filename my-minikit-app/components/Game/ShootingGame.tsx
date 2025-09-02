@@ -1,7 +1,7 @@
 'use client';
 
 import { Card } from '@/components/common';
-import { createMintNftCallData } from '@/lib/nft';
+import { SHOOTING_GAME_NFT_ABI } from '@/utils/abis';
 import { NFT_ADDRESS } from '@/utils/constants';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useAccount } from 'wagmi';
@@ -296,9 +296,10 @@ export function ShootingGame() {
       address
         ? [
             {
-              to: NFT_ADDRESS as `0x${string}`,
-              data: createMintNftCallData(address as `0x${string}`, 0, score),
-              value: BigInt(0),
+              address: NFT_ADDRESS as `0x${string}`,
+              abi: SHOOTING_GAME_NFT_ABI,
+              functionName: 'mint',
+              args: [address as `0x${string}`, 0, score, "0x"] as [string, number, number, string],
             },
           ]
         : [],
