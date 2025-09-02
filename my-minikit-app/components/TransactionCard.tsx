@@ -1,5 +1,4 @@
-import { Card } from "@/components/common";
-import { useNotification } from "@coinbase/onchainkit/minikit";
+import { useNotification } from '@coinbase/onchainkit/minikit';
 import {
   Transaction,
   TransactionButton,
@@ -13,8 +12,8 @@ import {
   TransactionToastIcon,
   TransactionToastLabel,
 } from '@coinbase/onchainkit/transaction';
-import { useCallback } from "react";
-import { useAccount } from "wagmi";
+import { useCallback } from 'react';
+import { useAccount } from 'wagmi';
 
 type TransactionProps = {
   calls: {
@@ -24,12 +23,11 @@ type TransactionProps = {
   }[];
 };
 
-
 /**
  * トランザクションカードコンポーネント
- * @returns 
+ * @returns
  */
-export function TransactionCard({calls}: TransactionProps) {
+export function TransactionCard({ calls }: TransactionProps) {
   const { address } = useAccount();
 
   const sendNotification = useNotification();
@@ -53,46 +51,29 @@ export function TransactionCard({calls}: TransactionProps) {
   );
 
   return (
-    <Card title="Make Your First Transaction">
-      <div className="space-y-4">
-        <p className="mb-4 text-[var(--app-foreground-muted)]">
-          Experience the power of seamless sponsored transactions with{' '}
-          <a
-            href="https://onchainkit.xyz"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#0052FF] hover:underline"
-          >
-            OnchainKit
-          </a>
-          .
+    <div className="w-full">
+      {address ? (
+        <Transaction
+          calls={calls}
+          onSuccess={handleSuccess}
+          onError={(error: TransactionError) => console.error('Transaction failed:', error)}
+        >
+          <TransactionButton className="text-md text-white" text="Mint NFT" />
+          <TransactionStatus>
+            <TransactionStatusAction />
+            <TransactionStatusLabel />
+          </TransactionStatus>
+          <TransactionToast className="mb-4">
+            <TransactionToastIcon />
+            <TransactionToastLabel />
+            <TransactionToastAction />
+          </TransactionToast>
+        </Transaction>
+      ) : (
+        <p className="mt-2 text-center text-sm text-yellow-400">
+          Connect your wallet to send a transaction
         </p>
-
-        <div className="flex flex-col items-center">
-          {address ? (
-            <Transaction
-              calls={calls}
-              onSuccess={handleSuccess}
-              onError={(error: TransactionError) => console.error('Transaction failed:', error)}
-            >
-              <TransactionButton className="text-md text-white" />
-              <TransactionStatus>
-                <TransactionStatusAction />
-                <TransactionStatusLabel />
-              </TransactionStatus>
-              <TransactionToast className="mb-4">
-                <TransactionToastIcon />
-                <TransactionToastLabel />
-                <TransactionToastAction />
-              </TransactionToast>
-            </Transaction>
-          ) : (
-            <p className="mt-2 text-center text-sm text-yellow-400">
-              Connect your wallet to send a transaction
-            </p>
-          )}
-        </div>
-      </div>
-    </Card>
+      )}
+    </div>
   );
 }

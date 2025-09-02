@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 // Card コンポーネント（枠付きコンテナ）
 type CardProps = {
@@ -10,8 +10,8 @@ type CardProps = {
 
 /**
  * Card コンポーネント
- * @param param0 
- * @returns 
+ * @param param0
+ * @returns
  */
 export function Card({ title, children, className = '', onClick }: CardProps) {
   const handleKeyDown = (e: React.KeyboardEvent) => {

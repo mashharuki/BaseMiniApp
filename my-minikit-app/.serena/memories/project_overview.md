@@ -1,6 +1,7 @@
 # my-minikit-app — Project Overview (Serena Memory)
 
 ## Stack & Runtime
+
 - Next.js 15 (App Router) + TypeScript (strict) + Tailwind CSS
 - MiniKit / OnchainKit for wallet, transactions, notifications
 - Farcaster Frame SDK for frame + notifications
@@ -9,6 +10,7 @@
 - Node 18+
 
 ## Key Directories / Files
+
 - `app/layout.tsx`: global styles + `generateMetadata` injects `fc:frame` header
 - `app/providers.tsx`: wraps app with `MiniKitProvider` (chain `baseSepolia`, appearance config)
 - `app/page.tsx`: main UI; sets MiniKit `setFrameReady`; renders demo Home
@@ -26,24 +28,28 @@
 - `next.config.mjs`: externals to silence warnings (`pino-pretty`, `lokijs`, `encoding`)
 
 ## Core Flows
-1) Frame metadata: `layout.tsx` adds `fc:frame`; `.well-known/farcaster.json` serves frame & account details
-2) Webhook (`POST /api/webhook`): verify FID↔key on `baseSepolia` Key Registry; save/delete notification tokens; send welcome notification
-3) Notifications: `POST /api/notify` -> `lib/notification-client` uses saved token to hit Farcaster endpoint
-4) Transactions: `TransactionCard` provides sponsored tx UI; on success triggers MiniKit notification
+
+1. Frame metadata: `layout.tsx` adds `fc:frame`; `.well-known/farcaster.json` serves frame & account details
+2. Webhook (`POST /api/webhook`): verify FID↔key on `baseSepolia` Key Registry; save/delete notification tokens; send welcome notification
+3. Notifications: `POST /api/notify` -> `lib/notification-client` uses saved token to hit Farcaster endpoint
+4. Transactions: `TransactionCard` provides sponsored tx UI; on success triggers MiniKit notification
 
 ## Environment Variables (high level)
+
 - Shared/OnchainKit: `NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME`, `NEXT_PUBLIC_URL`, `NEXT_PUBLIC_ICON_URL`, `NEXT_PUBLIC_ONCHAINKIT_API_KEY`
 - Frame/metadata: `FARCASTER_HEADER`, `FARCASTER_PAYLOAD`, `FARCASTER_SIGNATURE`, `NEXT_PUBLIC_APP_*` (icon, hero, og, etc.)
 - Redis (optional): `REDIS_URL`, `REDIS_TOKEN` (persistence disabled when missing)
 - Regenerate Farcaster account association: `npx create-onchain --manifest`
 
 ## Commands
+
 - Dev: `pnpm dev`
 - Build/Start: `pnpm build` / `pnpm start`
 - Lint/Format: `pnpm lint` / `pnpm format`
 - Types: `pnpm exec tsc --noEmit`
 
 ## Gotchas
+
 - URL consistency: if `NEXT_PUBLIC_URL` changes, confirm `layout.tsx` and `.well-known` image/URL references
 - Redis optional: webhook & notifications work but no persistence (`no_token` possible)
 - Server-only secrets: do not expose sensitive values via `NEXT_PUBLIC_*`
@@ -51,6 +57,7 @@
 - Keep externals in `next.config.mjs` to avoid noisy warnings
 
 ## Acceptance Checklist
+
 - Format/lint/types/build pass
 - UI renders in light/dark; Wallet/Frame actions work
 - `.well-known` JSON returns expected metadata

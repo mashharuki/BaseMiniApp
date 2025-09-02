@@ -31,7 +31,7 @@ export default function App() {
         <Header />
         {/* メインコンポーネント */}
         <main className="flex-1">
-         <Home />
+          <Home />
         </main>
         {/* フッター */}
         <Footer />

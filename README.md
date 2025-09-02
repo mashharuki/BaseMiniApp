@@ -98,6 +98,10 @@ FarcasterのSettingsからも生成できる方法を発見！
 
 ![](./docs/16.png)
 
+## テストネットにデプロイしたNFT(ERC1155)
+
+[0xd52dd0dcf92ff5714402ef9f3cb5f8a75bdccf37](https://sepolia.basescan.org/address/0xd52dd0dcf92ff5714402ef9f3cb5f8a75bdccf37)
+
 ## 参考文献
 - [Base Docs MiniApp](https://www.base.org/build/mini-apps)
 - [MiniApp クイックスタート](https://docs.base.org/mini-apps/quickstart/new-apps/install)
