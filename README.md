@@ -100,9 +100,9 @@ FarcasterのSettingsからも生成できる方法を発見！
 
 ## テストネットにデプロイしたNFT(ERC1155)
 
-[0xd52dd0dcf92ff5714402ef9f3cb5f8a75bdccf37](https://sepolia.basescan.org/address/0xd52dd0dcf92ff5714402ef9f3cb5f8a75bdccf37)
+[0x3dDAeE1bd8f4Dc2BCfe7f0f5B3C574196c3978FC](https://sepolia.basescan.org/address/0x3dDAeE1bd8f4Dc2BCfe7f0f5B3C574196c3978FC)
 
-[rarible - 0xd52dd0dcf92ff5714402ef9f3cb5f8a75bdccf37](https://testnet.rarible.com/collection/base/0xd52dd0dcf92ff5714402ef9f3cb5f8a75bdccf37/items)
+[rarible - 0x3dDAeE1bd8f4Dc2BCfe7f0f5B3C574196c3978FC](https://testnet.rarible.com/collection/base/0x3dDAeE1bd8f4Dc2BCfe7f0f5B3C574196c3978FC/items)
 
 ## 参考文献
 - [Base Docs MiniApp](https://www.base.org/build/mini-apps)

@@ -293,13 +293,19 @@ export function ShootingGame() {
   // NFTを発行するためのコールデータ
   const calls = useMemo(
     () =>
-      address
+      address && score > 0
         ? [
             {
               address: NFT_ADDRESS as `0x${string}`,
               abi: SHOOTING_GAME_NFT_ABI,
               functionName: 'mint',
-              args: [address as `0x${string}`, 0, score, "0x"] as [string, number, number, string],
+              // amount(=score) must be > 0 to avoid revert on ERC1155
+              args: [address as `0x${string}`, 0, score, '0x'] as [
+                string,
+                number,
+                number,
+                string,
+              ],
             },
           ]
         : [],
@@ -323,7 +329,12 @@ export function ShootingGame() {
             Tap / Space to Start
           </button>
         )}
-        {gameOver && <TransactionCard calls={calls} />}
+        {gameOver && score > 0 && <TransactionCard calls={calls} />}
+        {gameOver && score === 0 && (
+          <p className="mt-3 text-sm text-yellow-400">
+            Score is 0 — nothing to mint. Try again!
+          </p>
+        )}
       </div>
     </Card>
   );
