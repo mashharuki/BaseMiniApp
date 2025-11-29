@@ -121,3 +121,4 @@ FarcasterのSettingsからも生成できる方法を発見！
 ## 参考文献
 - [Base Docs MiniApp](https://www.base.org/build/mini-apps)
 - [MiniApp クイックスタート](https://docs.base.org/mini-apps/quickstart/new-apps/install)
+- [UNCHAIN create mini shooting game 教材](https://buidl.unchain.tech/Base/Base-Mini-Shooting-Game/)
